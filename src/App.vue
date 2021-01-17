@@ -2,17 +2,26 @@
   <div id="app">
     <v-app>
       <v-main>
-        <v-card> App </v-card>
+        <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+        <div class="devices">
+          <v-card>
+            <LGTV />
+          </v-card>
+        </div>
       </v-main>
     </v-app>
   </div>
 </template>
 
 <script>
+import LGTV from "./components/LGTV/LGTV.vue";
+
 export default {
   name: "App",
 
-  components: {},
+  components: {
+    LGTV,
+  },
 };
 </script>
 
@@ -32,5 +41,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.v-main__wrap > .devices {
+  display: flex;
+  margin: 20px;
+}
+
+.v-main__wrap > .devices > * {
+  display: flex;
+  flex: 1;
+}
+
+.v-main__wrap > .devices > *:not(:first-child) {
+  margin-left: 20px;
 }
 </style>
