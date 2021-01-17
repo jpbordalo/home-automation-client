@@ -3,6 +3,8 @@
     <v-app>
       <v-main>
         <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+        <Voice />
+        <hr />
         <div class="devices">
           <v-card>
             <LGTV />
@@ -19,6 +21,7 @@
 <script>
 import Tuya from "./components/Tuya/Tuya.vue";
 import LGTV from "./components/LGTV/LGTV.vue";
+import Voice from "./components/Voice/Voice.vue";
 
 export default {
   name: "App",
@@ -26,6 +29,7 @@ export default {
   components: {
     Tuya,
     LGTV,
+    Voice,
   },
 };
 </script>
