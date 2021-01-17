@@ -7,6 +7,9 @@
           <v-card>
             <LGTV />
           </v-card>
+          <v-card>
+            <Tuya />
+          </v-card>
         </div>
       </v-main>
     </v-app>
@@ -14,12 +17,14 @@
 </template>
 
 <script>
+import Tuya from "./components/Tuya/Tuya.vue";
 import LGTV from "./components/LGTV/LGTV.vue";
 
 export default {
   name: "App",
 
   components: {
+    Tuya,
     LGTV,
   },
 };
