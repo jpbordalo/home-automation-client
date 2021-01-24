@@ -2,16 +2,17 @@
   <div id="app">
     <v-app>
       <v-main>
-        <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-        <Voice />
+        <Toolbar />
+
         <hr />
-        <div class="devices">
-          <v-card>
-            <LGTV />
-          </v-card>
-          <v-card>
-            <Tuya />
-          </v-card>
+        <div class="app__wrapper">
+          <div class="app__menu-container">
+            <Menu class="app__menu" />
+          </div>
+          <div class="app__content">
+            <!-- <Devices /> -->
+            <router-view></router-view>
+          </div>
         </div>
       </v-main>
     </v-app>
@@ -19,17 +20,17 @@
 </template>
 
 <script>
-import Tuya from "./components/Tuya/Tuya.vue";
-import LGTV from "./components/LGTV/LGTV.vue";
-import Voice from "./components/Voice/Voice.vue";
+// import Devices from "@/components/Devices/Devices.vue";
+import Toolbar from "@/components/Toolbar/Toolbar.vue";
+import Menu from "@/components/Menu/Menu.vue";
 
 export default {
   name: "App",
 
   components: {
-    Tuya,
-    LGTV,
-    Voice,
+    Toolbar,
+    // Devices,
+    Menu,
   },
 };
 </script>
@@ -52,17 +53,28 @@ body {
   color: #2c3e50;
 }
 
-.v-main__wrap > .devices {
+.v-main__wrap {
   display: flex;
-  margin: 20px;
+  flex-direction: column;
 }
 
-.v-main__wrap > .devices > * {
+.app__wrapper {
   display: flex;
+  position: relative;
   flex: 1;
 }
 
-.v-main__wrap > .devices > *:not(:first-child) {
-  margin-left: 20px;
+.app__menu-container {
+  width: 56px;
+}
+
+.app__menu-container .app__menu {
+  position: absolute;
+  z-index: 1;
+}
+
+.app__content {
+  padding: 10px;
+  flex: 1;
 }
 </style>

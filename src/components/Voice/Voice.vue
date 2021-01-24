@@ -1,16 +1,39 @@
 <template>
   <div class="voice">
-    <div>
-      <p class="hints">
-        <v-btn @click="start"> Tap/click and speak an action.</v-btn>
+    <v-btn
+      @click="start"
+      @mouseover="
+        () => {
+          hover = true;
+        }
+      "
+      @mouseleave="
+        () => {
+          hover = false;
+        }
+      "
+    >
+      <img
+        v-if="!recognizing"
+        src="@/assets/microphone-off.svg"
+        style="width: 20px"
+      />
+      <img
+        v-if="recognizing"
+        src="@/assets/microphone-on_2.svg"
+        style="width: 20px"
+      />
+    </v-btn>
+
+    <div class="results">
+      <p class="hints" v-if="hover">
         <span v-for="(item, key) in ACTIONS_MAP" :key="key">
           {{ item.voiceCommand }},
         </span>
       </p>
       <div>
-        <p class="output">
-          <em v-if="recognizing">recognizing...</em>
-          <em v-if="voiceCommand">Result received: {{ voiceCommand }}.</em>
+        <p class="output" v-if="voiceCommand">
+          <em>Result received: {{ voiceCommand }}.</em>
         </p>
       </div>
     </div>
@@ -62,30 +85,8 @@
 
 <script>
 import speechToText from "./speechToText";
-import lgtvService from "@/services/lgtv/lgtv.service";
-
-const ACTIONS = {
-  VOLUME_UP: "VOLUME_UP",
-  VOLUME_DOWN: "VOLUME_DOWN",
-  VOLUME_MUTE: "VOLUME_MUTE",
-};
-
-const ACTIONS_MAP = [
-  {
-    voiceCommand: "mais alto",
-    actions: ACTIONS.VOLUME_UP,
-  },
-  {
-    voiceCommand: "mais baixo",
-    actions: ACTIONS.VOLUME_DOWN,
-  },
-  {
-    voiceCommand: "mute",
-    actions: ACTIONS.VOLUME_MUTE,
-  },
-];
-
-console.log(ACTIONS, ACTIONS_MAP);
+import { ACTIONS, ACTIONS_MAP } from "./actionsMapper";
+console.log(ACTIONS);
 
 export default {
   name: "Voice",
@@ -95,6 +96,7 @@ export default {
       voiceCommand: undefined,
       recognizing: false,
       ACTIONS_MAP,
+      hover: false,
     };
   },
 
@@ -121,39 +123,10 @@ export default {
     parseVoiceCommand(value) {
       this.voiceCommand = value.transcript;
       const voiceCommand = this.voiceCommand.toLowerCase();
-
       const actionObject = ACTIONS_MAP.find(
         (item) => item.voiceCommand === voiceCommand
       );
-      const action = actionObject ? actionObject.action : null;
-
-      if (action === ACTIONS.VOLUME_UP) {
-        this.volumeUp();
-      }
-      if (action === ACTIONS.VOLUME_DOWN) {
-        this.volumeDown();
-      }
-      if (action === ACTIONS.VOLUME_MUTE) {
-        this.volumeMute();
-      }
-    },
-
-    volumeDown() {
-      lgtvService.volumeDown().then((res) => {
-        console.log(res);
-      });
-    },
-
-    volumeUp() {
-      lgtvService.volumeUp().then((res) => {
-        console.log(res);
-      });
-    },
-
-    volumeMute() {
-      lgtvService.volumeMute().then((res) => {
-        console.log(res);
-      });
+      actionObject.action();
     },
   },
 };
@@ -161,6 +134,22 @@ export default {
 
 <style scoped>
 .voice {
-  margin: 20px;
+  /* margin: 20px; */
+}
+
+.hints {
+  position: absolute;
+  z-index: 1;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid;
+  border-radius: 5px;
+  width: 200px;
+  top: 5px;
+  left: -135px;
+}
+
+.results {
+  position: relative;
 }
 </style>

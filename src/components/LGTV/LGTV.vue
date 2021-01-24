@@ -2,42 +2,42 @@
   <div class="lgtv">
     <h1>TV</h1>
     <div class="lgtv__power">
-      <img v-if="!tvStatus" class="lgtv__icon" src="../../assets/tv-off.svg" />
-      <img v-if="tvStatus" class="lgtv__icon" src="../../assets/tv-on.svg" />
+      <img v-if="!tvStatus" class="lgtv__icon" src="@/assets/tv-off.svg" />
+      <img v-if="tvStatus" class="lgtv__icon" src="@/assets/tv-on.svg" />
       <img
         v-if="tvStatus"
         class="lgtv__icon lgtv__power-status"
-        src="../../assets/tv-online.svg"
+        src="@/assets/tv-online.svg"
       />
       <img
         v-if="!tvStatus"
         class="lgtv__icon lgtv__power-status"
-        src="../../assets/tv-offline.svg"
+        src="@/assets/tv-offline.svg"
       />
       <img
         v-if="!tvStatus"
         @click="tvOn"
         class="lgtv__icon lgtv__power-action"
-        src="../../assets/power-off.svg"
+        src="@/assets/power-off.svg"
       />
       <img
         v-if="tvStatus"
         @click="tvOff"
         class="lgtv__icon lgtv__power-action"
-        src="../../assets/power-on.svg"
+        src="@/assets/power-on.svg"
       />
     </div>
     <div class="lgtv__volume">
       <h3>Volume</h3>
       <div class="lgtv__volume-action">
         <button @click="volumeMute">
-          <img class="lgtv__icon" src="../../assets/vol-mute.svg" />
+          <img class="lgtv__icon" src="@/assets/vol-mute.svg" />
         </button>
         <button @click="volumeDown">
-          <img class="lgtv__icon" src="../../assets/vol-down.svg" />
+          <img class="lgtv__icon" src="@/assets/vol-down.svg" />
         </button>
         <button @click="volumeUp">
-          <img class="lgtv__icon" src="../../assets/vol-up.svg" />
+          <img class="lgtv__icon" src="@/assets/vol-up.svg" />
         </button>
       </div>
     </div>
