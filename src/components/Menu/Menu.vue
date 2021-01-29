@@ -11,6 +11,17 @@
       </v-list-item>
       <v-list-item link>
         <v-list-item-icon>
+          <img
+            src="@/assets/notes.svg"
+            style="width: 20px; display: flex; justify-content: center"
+          />
+        </v-list-item-icon>
+        <v-list-item-title>
+          <router-link to="/notes">Notes</router-link>
+        </v-list-item-title>
+      </v-list-item>
+      <v-list-item link>
+        <v-list-item-icon>
           <v-icon>mdi-cog</v-icon>
         </v-list-item-icon>
         <v-list-item-title>

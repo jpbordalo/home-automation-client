@@ -52,7 +52,7 @@ const lgtvService = {
     },
 
     source() {
-        const url = `${baseUrl}/switch-input?input=HDMI_1`;
+        const url = `${baseUrl}/switch-input?input=HDMI_2`;
         return axios({
             method: "post",
             url,

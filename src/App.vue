@@ -2,15 +2,13 @@
   <div id="app">
     <v-app>
       <v-main>
-        <Toolbar />
-
-        <hr />
+        <NoteEdit v-if="isDialogOpen" @onCancel="closeDialog" />
+        <Header />
         <div class="app__wrapper">
           <div class="app__menu-container">
             <Menu class="app__menu" />
           </div>
           <div class="app__content">
-            <!-- <Devices /> -->
             <router-view></router-view>
           </div>
         </div>
@@ -20,17 +18,26 @@
 </template>
 
 <script>
-// import Devices from "@/components/Devices/Devices.vue";
-import Toolbar from "@/components/Toolbar/Toolbar.vue";
+import NoteEdit from "@/components/Notes/NoteEdit.vue";
+import Header from "@/components/Header/Header.vue";
 import Menu from "@/components/Menu/Menu.vue";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "App",
 
   components: {
-    Toolbar,
-    // Devices,
+    NoteEdit,
+    Header,
     Menu,
+  },
+
+  computed: {
+    ...mapState("notes", ["isDialogOpen"]),
+  },
+
+  methods: {
+    ...mapActions("notes", ["closeDialog"]),
   },
 };
 </script>
