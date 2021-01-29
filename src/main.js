@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import ROUTES from "@/plugins/routes";
+import store from "@/store";
 import App from './App.vue';
 import vuetify from './plugins/vuetify';
-import ROUTES from "@/plugins/routes";
 
 Vue.config.productionTip = false;
 
@@ -13,6 +14,7 @@ const router = new VueRouter({
 Vue.use(VueRouter);
 
 new Vue({
+  store,
   router,
   vuetify,
   render: h => h(App)
