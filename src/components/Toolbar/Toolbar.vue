@@ -3,9 +3,13 @@
     <div class="item">
       <Voice />
     </div>
-    <div class="item">
-      <v-btn color="lighten-2" @click="openDialog">
-        <img class="lgtv__icon" src="@/assets/notes.svg" style="width: 20px" />
+    <div class="item" v-if="false">
+      <v-btn color="lighten-2" text @click="openDialog">
+        <img
+          class="lgtv__icon"
+          src="@/assets/notes-green.svg"
+          style="width: 20px"
+        />
       </v-btn>
     </div>
   </div>

@@ -1,41 +1,47 @@
 <template>
-  <v-card>
+  <v-card tile>
     <div class="socket">
-      <img :src="device.icon" class="socket__image" />
-      <div class="socket__data">
-        <div>name: {{ device.name }}</div>
-        <div>
-          online:
-          <img
-            v-if="device.data.online"
-            class="socket__power-status"
-            src="../../assets/tv-online.svg"
-          />
-          <img
-            v-if="!device.data.online"
-            class="socket__power-status"
-            src="../../assets/tv-offline.svg"
-          />
+      <h1>{{ device.name }}</h1>
+      <div class="socket__content">
+        <!-- <img :src="device.icon" class="socket__image" /> -->
+        <v-icon class="socket__image">mdi-power-socket-de</v-icon>
+        <div class="socket__data">
+          <!-- <div>name: {{ device.name }}</div> -->
+          <div>
+            <!-- online: -->
+            <img
+              v-if="device.data.online"
+              class="socket__power-status"
+              src="../../assets/tv-online.svg"
+            />
+            <img
+              v-if="!device.data.online"
+              class="socket__power-status"
+              src="../../assets/tv-offline.svg"
+            />
+          </div>
+          <!-- <div>state: {{ device.data.state }}</div> -->
         </div>
-        <div>state: {{ device.data.state }}</div>
+        <img
+          v-if="!device.data.state"
+          @click="handleToggleStatus(device)"
+          class="socket__power-action"
+          src="../../assets/power-off.svg"
+        />
+        <img
+          v-if="device.data.state"
+          @click="handleToggleStatus(device)"
+          class="socket__power-action"
+          src="../../assets/power-on.svg"
+        />
       </div>
-      <img
-        v-if="!device.data.state"
-        @click="handleToggleStatus(device)"
-        class="socket__power-action"
-        src="../../assets/power-off.svg"
-      />
-      <img
-        v-if="device.data.state"
-        @click="handleToggleStatus(device)"
-        class="socket__power-action"
-        src="../../assets/power-on.svg"
-      />
     </div>
   </v-card>
 </template>
 
 <script>
+import tuyaService from "@/services/tuya/tuya.service";
+
 export default {
   name: "Socket",
 
@@ -47,7 +53,15 @@ export default {
 
   methods: {
     handleToggleStatus(device) {
-      this.$emit("onToggleStatus", device);
+      const { id, data } = device;
+      tuyaService
+        .handleToggleStatus(id, !data.state)
+        .then(() => {
+          device.data.state = !device.data.state;
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
     },
   },
 };
@@ -56,24 +70,42 @@ export default {
 <style scoped>
 ::v-deep.v-card {
   width: 100%;
+  display: flex;
 }
 
 .socket {
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 10px;
+  margin: 20px 0;
+  flex: 1;
 }
 
-.socket__image {
-  width: 50px;
-  height: 50px;
+h1 {
+  font-weight: 400;
+}
+
+.socket__content {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.socket__content .socket__image {
+  /* width: 50px;
+  height: 50px; */
+  color: #fff;
+  font-size: 30px;
 }
 
 .socket__data {
   display: flex;
   flex-direction: column;
   flex: 1;
+  margin: 0 20px;
+  /* width: 170px; */
 }
 
 .socket__power-status {

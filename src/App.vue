@@ -58,6 +58,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  color: white !important;
+  background-image: linear-gradient(135deg, #4c565a, #384246);
+  background-image: linear-gradient(135deg, #5c6467, #39474c);
+
+  background: #21c6c2;
+  background: #4c8386;
+  background: #32323e;
+  background-image: linear-gradient(135deg, #4a5a6f, #182436);
+  background-image: linear-gradient(90deg, #4a5a6f, #182436);
+  background: #4a5a6f;
+  background: #333643;
 }
 
 .v-main__wrap {
@@ -82,6 +93,7 @@ body {
 
 .app__content {
   padding: 10px;
+  padding: 40px;
   flex: 1;
 }
 </style>

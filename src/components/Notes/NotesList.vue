@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="notes-list">
     <h1>NotesList</h1>
     <div class="notes-list__list">
       <NotesListItem @onNewNote="() => createNewNote(true)" />
@@ -53,21 +53,29 @@ export default {
 </script>
 
 <style scoped>
+.notes-list {
+  padding: 0px 20px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
 ::v-deep .note-list-item {
-  width: calc(calc(100% - 20px) / 3);
-  margin-bottom: 10px;
+  width: calc(calc(100% - calc(20px * 5)) / 5);
+  margin-bottom: 20px;
   float: left;
 }
 
 ::v-deep .note-list-item:not(.note-list-item__new) {
-  display: block;
+  /* display: block; */
 }
 
-::v-deep .notes-list__list .note-list-item:not(:nth-child(3n + 1)) {
-  margin-left: 10px;
+::v-deep .notes-list__list .note-list-item:not(:nth-child(5n + 1)) {
+  margin-left: 20px;
 }
 
-::v-deep .notes-list__list .note-list-item:not(:nth-child(-n + 3)) {
-  margin-top: 10px;
+::v-deep .notes-list__list .note-list-item:not(:nth-child(-n + 5)) {
+  margin-top: 20px;
 }
 </style>

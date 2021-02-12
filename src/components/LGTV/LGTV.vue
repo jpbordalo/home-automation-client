@@ -1,48 +1,57 @@
 <template>
-  <div class="lgtv">
-    <h1>TV</h1>
-    <div class="lgtv__power">
-      <img v-if="!tvStatus" class="lgtv__icon" src="@/assets/tv-off.svg" />
-      <img v-if="tvStatus" class="lgtv__icon" src="@/assets/tv-on.svg" />
-      <img
-        v-if="tvStatus"
-        class="lgtv__icon lgtv__power-status"
-        src="@/assets/tv-online.svg"
-      />
-      <img
-        v-if="!tvStatus"
-        class="lgtv__icon lgtv__power-status"
-        src="@/assets/tv-offline.svg"
-      />
-      <img
-        v-if="!tvStatus"
-        @click="tvOn"
-        class="lgtv__icon lgtv__power-action"
-        src="@/assets/power-off.svg"
-      />
-      <img
-        v-if="tvStatus"
-        @click="tvOff"
-        class="lgtv__icon lgtv__power-action"
-        src="@/assets/power-on.svg"
-      />
-    </div>
-    <div class="lgtv__volume">
-      <h3>Volume</h3>
-      <div class="lgtv__volume-action">
-        <button @click="volumeMute">
-          <img class="lgtv__icon" src="@/assets/vol-mute.svg" />
-        </button>
-        <button @click="volumeDown">
-          <img class="lgtv__icon" src="@/assets/vol-down.svg" />
-        </button>
-        <button @click="volumeUp">
-          <img class="lgtv__icon" src="@/assets/vol-up.svg" />
-        </button>
+  <v-card tile>
+    <div class="lgtv">
+      <h1>LG TV</h1>
+      <div class="lgtv__content">
+        <div class="lgtv__power">
+          <img v-if="!tvStatus" class="lgtv__icon" src="@/assets/tv-off.svg" />
+          <img v-if="tvStatus" class="lgtv__icon" src="@/assets/tv-on.svg" />
+          <img
+            v-if="tvStatus"
+            class="lgtv__icon lgtv__power-status"
+            src="@/assets/tv-online.svg"
+          />
+          <img
+            v-if="!tvStatus"
+            class="lgtv__icon lgtv__power-status"
+            src="@/assets/tv-offline.svg"
+          />
+          <img
+            v-if="!tvStatus"
+            @click="tvOn"
+            class="lgtv__icon lgtv__power-action"
+            src="@/assets/power-off.svg"
+          />
+          <img
+            v-if="tvStatus"
+            @click="tvOff"
+            class="lgtv__icon lgtv__power-action"
+            src="@/assets/power-on.svg"
+          />
+        </div>
+        <div class="lgtv__volume">
+          <div class="lgtv__volume-action">
+            <button @click="volumeMute">
+              <img class="lgtv__icon" src="@/assets/vol-mute.svg" />
+            </button>
+            <button @click="volumeDown">
+              <img class="lgtv__icon" src="@/assets/vol-down.svg" />
+            </button>
+            <button @click="volumeUp">
+              <img class="lgtv__icon" src="@/assets/vol-up.svg" />
+            </button>
+          </div>
+        </div>
       </div>
+      <v-btn
+        class="lgtv__source themed-button"
+        color="lighten-2"
+        text
+        @click="source"
+        >Source</v-btn
+      >
     </div>
-    <v-btn class="lgtv__source" color="primary" @click="source">Source</v-btn>
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -117,10 +126,19 @@ export default {
 </script>
 
 <style scoped>
+::v-deep.v-card {
+  width: 100%;
+  display: flex;
+}
+
+h1 {
+  font-weight: 400;
+}
+
 button {
   background: none;
   height: 40px;
-  border: 1px solid;
+  border: 1px solid #11b0b2;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -132,6 +150,19 @@ button {
   align-items: center;
   margin: 20px 0;
 }
+
+.lgtv__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .lgtv__content .lgtv__image {
+  color: #fff;
+  font-size: 30px;
+} */
 
 .actions button {
   margin-left: 5px;
@@ -192,5 +223,21 @@ button {
 .lgtv__volume-action button img {
   width: 15px;
   height: 15px;
+}
+
+.v-card {
+  box-shadow: none;
+  border: 2px solid;
+}
+
+.v-btn.themed-button {
+  border-style: solid;
+  color: #858585;
+  color: #fff;
+}
+
+.v-btn.themed-button:hover {
+  border-color: white;
+  color: white;
 }
 </style>

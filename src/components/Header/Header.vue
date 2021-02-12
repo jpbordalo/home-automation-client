@@ -24,7 +24,23 @@ export default {
   display: flex;
   padding: 10px;
   height: 56px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.12); */
+  border-bottom: 1px solid #11b0b2;
+  /* background: #3c4a5b; */
+  border-bottom: 1px solid #3c4a5b;
+}
+
+.header__logo {
+  background: #11b0b2;
+  /* background: #fff; */
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 54px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header__logo img {
